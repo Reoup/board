@@ -30,7 +30,6 @@ class ListBoardComponent extends Component {
   render() {
     return (
       <div>
-        <h2 className="text-center">Boards List</h2>
           <div className ="row">
             <button className="btn btn-primary" onClick={this.createBoard}>글 작성</button>
           </div>
