@@ -41,3 +41,8 @@
   margin: auto;
   color: white;
 }
+
+.btn-position{
+  text-align: end;
+  margin-right:-10px;
+}
