@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import fns_logo from '../fns_logo.png';
 
 class HeaderComponent extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -15,7 +14,7 @@ class HeaderComponent extends Component {
       <div>
         <header>
           <nav className="navbar navbar-expand-md navbar-dark bg-dark bg-dark">
-            <div><a href="http://localhost:3000" className="navbar-brand"> <img src={fns_logo} width="70px" height="70px"/></a></div>
+            <div><a href="http://localhost:3000" className="navbar-brand">게시판 연습중</a></div>
             <h2 className="text-center">Boards List</h2>
           </nav>
         </header>
