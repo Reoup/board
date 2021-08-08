@@ -58,11 +58,11 @@ class ListBoardComponent extends Component {
     return (
       <div>
         <div className="btn-position">
-          <button className="btn btn-primary btn-custom" onClick={this.createBoard}>글 작성</button>
+          <button className="btn btn-outline-primary btn-custom" onClick={this.createBoard}>글 작성</button>
         </div>
         <div className="row">
           <table className="table table-bordered table-hover">
-            <thead className="thead-color">
+            <thead className="thead-color text-cent">
               <tr>
                 <th>글 번호</th>
                 <th>타이틀 </th>
