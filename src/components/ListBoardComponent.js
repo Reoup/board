@@ -9,10 +9,10 @@ class ListBoardComponent extends Component {
     super(props);
 
     this.state = {
-      boards: []
+      boards: [] // 페이지에 표시될 글 목록데이터를 넣기 위한 boards를 this.state에 선언
     };
 
-    this.createBoard = this.createBoard.bind(this);
+    this.createBoard = this.createBoard.bind(this); //  글 작성 버튼을 클릭 했을 때 동작하는 createBoard 함수를 바인드( bind 메소드가 호출되면 새로운 함수를 생성)
   }
 
   _dataFormat(data, dataType, format) {
@@ -33,24 +33,25 @@ class ListBoardComponent extends Component {
     return data;
   }
 
-  initialRegistrationTime = (boards) => {
-    console.log(boards)
-    return boards ? this._dataFormat(boards, 'date', 'YYYY-MM-DD') : '-';
+  initialRegistrationTime = (reg_dt) => {
+    console.log(reg_dt)
+    return reg_dt ? this._dataFormat(reg_dt, 'date', 'YYYY-MM-DD') : '-';
   }
 
 
 
-  componentDidMount() {
+  componentDidMount() { // 리엑트의 생명주기 메소드인 'componentDidMount'에서 'BoardService'의 메소드를 호출해서 데이터를 가져옴
     BoardSerivce.getBoards().then((res) => {
-      this.setState({ boards: res.data });
+      this.setState({ boards: res.data }); // this.state에 선언한 변수의 값을 변경하기 위해서 setState 사용함
     });
   }
 
-  createBoard() {
+
+  createBoard() { // 글 작성 버튼을 클릭 시 글 작성 페이지로 이동하게 해주는 함수를 정의한 것(경로에 파라미터 추가)
     this.props.history.push('/create-board/_create');
   }
 
-  readBoard(seq) {
+  readBoard(seq) { // 글을 클릭 했을 때 글 상세보기 페이지로 이동하게 해주는 함수를 정의한 것
     this.props.history.push(`/read-board/${seq}`);
   }
 
@@ -71,11 +72,11 @@ class ListBoardComponent extends Component {
             </thead>
             <tbody>
               {
-                this.state.boards.map(
+                this.state.boards.map( // boards의 데이터를 출력
                   board =>
                     <tr
                       key={board.seq}
-                      onClick={() => this.readBoard(board.seq)}>
+                      onClick={() => this.readBoard(board.seq)}> 
                       <td> {board.seq} </td>
                       <td> {board.title} </td>
                       <td> {this.initialRegistrationTime(board.reg_dt)} </td>

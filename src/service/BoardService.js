@@ -1,25 +1,25 @@
 import axios from 'axios';
 
-const BOARD_API_BASE_URL = "http://localhost:8080/api/board";
+const BOARD_API_BASE_URL = "http://localhost:8080/api/board"; // spring boot api의 url 
 
 class BoardService {
-  getBoards() {
+  getBoards() { // 글목록 데이터를 가져오는 함수
     return axios.get(BOARD_API_BASE_URL);
   }
 
-  createBoard(board){
+  createBoard(board){ // 글 작성 함수를 추가, axios의 post 함수를 사용해서 통신
     return axios.post(BOARD_API_BASE_URL, board);
   }
 
-  getOneBoard(seq) {
+  getOneBoard(seq) { // 글 상세보기 함수 추가, 경로 파라미터로 글 번호를 설정하여 통신
     return axios.get(BOARD_API_BASE_URL + "/" + seq);
   }
 
-  updateBoard(seq, board) {
+  updateBoard(seq, board) { // 글 수정 함수 추가, 경로 파라미터로 글 번호를 수정, 수정할 객체정보를 body에 담아 통신
     return axios.put(BOARD_API_BASE_URL+ "/" + seq, board);
   }
 
-  deleteBoard(seq){
+  deleteBoard(seq){ // 글 삭제 함수 추가, 경로 파라미터로 글 번호를 설정, 글 번호에 해당하는 글을 삭제
     return axios.delete(BOARD_API_BASE_URL + "/" + seq);
   }
 
