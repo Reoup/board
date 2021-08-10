@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import BoardService from '../service/BoardService';
 import moment from 'moment';
-import _ from 'lodash';
 
 class ReadBoardComponent extends Component {
     constructor(props) {
@@ -49,33 +48,13 @@ class ReadBoardComponent extends Component {
         }
     }
 
-    _dataFormat(data, dataType, format) {
-        if (data === undefined || data === null) {
-            return null;
-        }
-        if (dataType === 'date') {
-            let dateFormat = 'YYYY-MM-DD';
-            if (format !== undefined) {
-                dateFormat = format;
-            }
-            return moment(new Date(data)).format(dateFormat)
-        } else if (dataType === 'number') {
-            if (_.isNumber(data)) {
-                return new Intl.NumberFormat().format(data);
-            }
-        }
-        return data;
+    _dataFormat(data, format) {
+        return moment(new Date(data)).format(format);
     }
 
     initialRegistrationTime = (cTime) => {
-        if(!cTime){
-            return(
-                <div>
-                </div>
-            );
-        }
-        console.log(cTime);
-        return cTime ? this._dataFormat(cTime, 'date', 'YYYY-MM-DD') : '-';
+        if(!cTime) return;
+        return cTime ? this._dataFormat(cTime, 'YYYY-MM-DD') : '-';
     }
 
     render() {
@@ -90,7 +69,7 @@ class ReadBoardComponent extends Component {
                         </div>
                         <div className="row">
                             <span><label>Contents</label>:</span> <br></br>
-                            <textarea value={this.state.board.content} readOnly />
+                            <textarea style={{minHeight:"200px"}} value={this.state.board.content} readOnly />
                         </div>
                         <label>생성자: </label><span> {this.initialRegistrationTime(this.state.board.reg_dt)}</span>
                         {/*글 목록, 글 수정, 글 삭제하는 함수*/ }

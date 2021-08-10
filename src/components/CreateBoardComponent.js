@@ -41,7 +41,7 @@ createBoard = (event) => {
       content: this.state.content,
   };
 
-  console.log("board => "+ JSON.stringify(board));
+
   if(this.state.seq === '_create'){
     BoardService.createBoard(board)
     .then(res =>{
@@ -51,14 +51,20 @@ createBoard = (event) => {
   else{
     BoardService.updateBoard(this.state.seq, board)
     .then(res => {
-      this.props.history.push('/board');
+      this.props.history.push(`/read-board/${this.state.seq}`);
     });
   }
 }
 
 // 글작성 취소버튼이 클릭 되었을 시 글 목록 페이지로 이동하는 함수를 선언
-cancel() {
-  this.props.history.push('/board');
+cancel = (event) => {
+  event.preventDefault();
+  if(this.state.seq === '_create'){
+    this.props.history.push('/board')
+  }
+  else{
+    this.props.history.push(`/read-board/${this.state.seq}`);
+  }
 }
 
 // 페이지 타이틀을 글 작성인지 글 수정인지에 따라서 구분해서 출력하도록 수정
@@ -108,7 +114,7 @@ render() {
                               </div>
                               <div className = "form-group">
                                   <label> Contents  </label>
-                                  <textarea placeholder="contents" name="contents" className="form-control" 
+                                  <textarea placeholder="contents" name="contents" className="form-control" style={{minHeight:"200px"}}
                                   value={this.state.content} onChange={this.changeContentsHandler}/>
                               </div>
                               <button className="btn btn-success" onClick={this.createBoard}>Save</button>
@@ -118,11 +124,9 @@ render() {
                   </div>
               </div>
           </div>
-
       </div>
-  );
+    );
+  }
 }
-}
-
 
 export default CreateBoardComponent;

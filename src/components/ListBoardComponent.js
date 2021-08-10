@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import BoardSerivce from '../service/BoardService';
 import moment from 'moment';
-import _ from 'lodash';
 
 class ListBoardComponent extends Component {
 
@@ -9,36 +8,21 @@ class ListBoardComponent extends Component {
     super(props);
 
     this.state = {
-      boards: [] // 페이지에 표시될 글 목록데이터를 넣기 위한 boards를 this.state에 선언
+      boards: [], // 페이지에 표시될 글 목록데이터를 넣기 위한 boards를 this.state에 선언
+      message: ''
     };
 
     this.createBoard = this.createBoard.bind(this); //  글 작성 버튼을 클릭 했을 때 동작하는 createBoard 함수를 바인드( bind 메소드가 호출되면 새로운 함수를 생성)
   }
 
-  _dataFormat(data, dataType, format) {
-    if (data === undefined || data === null) {
-      return null;
-    }
-    if (dataType === 'date') {
-      let dateFormat = 'YYYY-MM-DD';
-      if (format !== undefined) {
-        dateFormat = format;
-      }
-      return moment(new Date(data)).format(dateFormat)
-    } else if (dataType === 'number') {
-      if (_.isNumber(data)) {
-        return new Intl.NumberFormat().format(data);
-      }
-    }
-    return data;
+  _dataFormat(data, format) {
+    return moment(new Date(data)).format(format);
   }
-
-  initialRegistrationTime = (reg_dt) => {
-    console.log(reg_dt)
-    return reg_dt ? this._dataFormat(reg_dt, 'date', 'YYYY-MM-DD') : '-';
-  }
-
-
+  initialRegistrationTime = (cTime) => {
+    console.log(cTime);
+    if(!cTime) return;
+    return cTime ? this._dataFormat(cTime, 'YYYY-MM-DD') : '-';
+}
 
   componentDidMount() { // 리엑트의 생명주기 메소드인 'componentDidMount'에서 'BoardService'의 메소드를 호출해서 데이터를 가져옴
     BoardSerivce.getBoards().then((res) => {
