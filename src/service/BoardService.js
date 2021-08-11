@@ -3,8 +3,8 @@ import axios from 'axios';
 const BOARD_API_BASE_URL = "http://localhost:8080/api/board"; // spring boot api의 url 
 
 class BoardService {
-  getBoards() { // 글목록 데이터를 가져오는 함수
-    return axios.get(BOARD_API_BASE_URL);
+  getBoards(p_num) { // 글목록 데이터를 가져오는 함수
+    return axios.get(BOARD_API_BASE_URL+"?p_num"+p_num);
   }
 
   createBoard(board){ // 글 작성 함수를 추가, axios의 post 함수를 사용해서 통신
